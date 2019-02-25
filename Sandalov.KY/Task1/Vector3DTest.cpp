@@ -8,9 +8,9 @@ int main() {
 	setlocale(LC_ALL, "Russian");
 	Vector3D v1, v2;
 	// Vvodim znacheniya koordinat nachalnoy i conechnoy tochek, vvod vektorov iz potoka
-	cout << "Vvedite v1(x1 x2 y1 y2 z1 z2): ";
+	cout << "Vvedite v1(x2 y2 z2): ";
 	cin >> v1;
-	cout << "Vvedite v2(x1 x2 y1 y2 z1 z2): ";
+	cout << "Vvedite v2(x2 y2 z2): ";
 	cin >> v2;
 	cout << "v1:" << endl << v1 << endl;
 	cout << "v2:" << endl << v2 << endl;
@@ -30,8 +30,9 @@ int main() {
 	Vector3D v6 = v1 * v2;
 	cout << "Proizvedenie vektorov v1 v2 (=v6)" << endl;
 	cout << v6 << endl;
-	//proizvedenie na chislo
-	Vector3D v7 = v1 * 2;
+	//proizvedenie skalyara na vector
+	double a = 0.5;
+	Vector3D v7 = a * v1;
 	cout << "Proizvedenie vektora v1 i chisla 2 (=v7)" << endl;
 	cout << v7 << endl;
 	// operatori sravneniya

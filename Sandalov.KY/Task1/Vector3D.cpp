@@ -3,83 +3,63 @@
 
 Vector3D::Vector3D() // konstruktor
 {
-	x1 = 0;
-	x2 = 0;
-	y1 = 0;
-	y2 = 0;
-	z1 = 0;
-	z2 = 0;
+
+	x = 0;
+	y = 0;
+	z = 0;
 }
 
-Vector3D::Vector3D(double _x1, double _x2, double _y1, double _y2, double _z1, double _z2) // s parametrami
+Vector3D::Vector3D(double x2, double y2, double z2) // s parametrami
 {
-	x1 = _x1;
-	x2 = _x2;
-	y1 = _y1;
-	y2 = _y2;
-	z1 = _z1;
-	z2 = _z2;
+	x = x2;
+	y = y2;
+	z = z2;
 }
 
-Vector3D Vector3D::operator= (const Vector3D& v2) //peregruzka operatora =
+Vector3D& Vector3D::operator= (const Vector3D& v2) //peregruzka operatora =
 {
 	if (this != &v2)
 	{
-		x1 = v2.x1;
-		x2 = v2.x2;
-		y1 = v2.y1;
-		y2 = v2.y2;
-		z1 = v2.z1;
-		z2 = v2.z2;
+		x = v2.x;
+		y = v2.y;
+		z = v2.z;
 	}
 	return* this;
 }
 
-Vector3D Vector3D::operator+ (const Vector3D& c2) //peregruzka +
+Vector3D Vector3D::operator+ (const Vector3D& v2) //peregruzka +
 {
 	Vector3D tmp;
-	tmp.x1 = x1 + c2.x1;
-	tmp.x2 = x2 + c2.x2;
-	tmp.y1 = y1 + c2.y1;
-	tmp.y2 = y2 + c2.y2;
-	tmp.z1 = z1 + c2.z1;
-	tmp.z2 = z2 + c2.z2;
+	tmp.x = x + v2.x;
+	tmp.y = y + v2.y;
+	tmp.z = z + v2.z;
 	return tmp;
 }
 
-Vector3D Vector3D::operator- (const Vector3D& c2)//peregruzka -
+Vector3D Vector3D::operator- (const Vector3D& v2)//peregruzka -
 {
 	Vector3D tmp;
-	tmp.x1 = x1 - c2.x1;
-	tmp.x2 = x2 - c2.x2;
-	tmp.y1 = y1 - c2.y1;
-	tmp.y2 = y2 - c2.y2;
-	tmp.z1 = z1 - c2.z1;
-	tmp.z2 = z2 - c2.z2;
+	tmp.x = x - v2.x;
+	tmp.y = y - v2.y;
+	tmp.z = z - v2.z;
 	return tmp;
 }
 
-Vector3D Vector3D::operator* (const Vector3D& c2)//peregruzka *
+Vector3D Vector3D::operator* (const Vector3D& v2)//peregruzka *
 {
 	Vector3D tmp;
-	tmp.x1 = x1 * c2.x1;
-	tmp.x2 = x2 * c2.x2;
-	tmp.y1 = y1 * c2.y1;
-	tmp.y2 = y2 * c2.y2;
-	tmp.z1 = z1 * c2.z1;
-	tmp.z2 = z2 * c2.z2;
+	tmp.x = x * v2.x;
+	tmp.y = y * v2.y;
+	tmp.z = z * v2.z;
 	return tmp;
 }
 
-Vector3D Vector3D::operator* (double a)// dlya umnozheniya na konstantu
+Vector3D operator* (double d, const Vector3D& v2)// umnozhenie skalyara na vektor
 {
 	Vector3D tmp;
-	tmp.x1 = x1 * a;
-	tmp.x2 = x2 * a;
-	tmp.y1 = y1 * a;
-	tmp.y2 = y2 * a;
-	tmp.z1 = z1 * a;
-	tmp.z2 = z2 * a;
+	tmp.x = d * v2.x;
+	tmp.y = d * v2.y;
+	tmp.z = d * v2.z;
 	return tmp;
 }
 
@@ -90,7 +70,7 @@ bool Vector3D::operator== (const Vector3D& v2)// peregruzka ==
 
 bool Vector3D::operator!= (const Vector3D& v2)// peregruzka !=
 {
-	return (lng(*this) != lng(v2));
+	return !(*this == v2);
 }
 
 bool Vector3D::operator<= (const Vector3D& v2)// peregruzka <=
@@ -105,27 +85,29 @@ bool Vector3D::operator>= (const Vector3D& v2)// peregruzka >=
 
 bool Vector3D::operator< (const Vector3D& v2)// peregruzka <
 {
-	return (lng(*this) < lng(v2));
+	return !(*this >= v2);
 }
 
 bool Vector3D::operator> (const Vector3D& v2)// peregruzka >
 {
-	return (lng(*this) > lng(v2));
+	return !(*this <= v2);
 }
 
 double Vector3D::lng(const Vector3D& v2)// schitaet dlinnu vectora
 {
-	return sqrt((v2.x2 - v2.x1)*(v2.x2 - v2.x1) + (v2.y2 - v2.y1)*(v2.y2 - v2.y1) + (v2.z2 - v2.z1)*(v2.z2 - v2.z1));
+	return sqrt((v2.x)*(v2.x) + (v2.y)*(v2.y) + (v2.z)*(v2.z));
 }
 
 ostream& operator<< (ostream& stream, const Vector3D& v2)// peregruzka vivoda 
 {
-	stream << v2.x1 << endl << v2.x2 << endl << v2.y1 << endl << v2.y2 << endl << v2.z1 << endl << v2.z2;
+	stream << v2.x << endl << v2.y << endl << v2.z << endl;
+	
 	return stream;
 }
 
 istream& operator>> (istream& stream, Vector3D& v2)// peregruzka vvoda 
 {
-	stream >> v2.x1 >> v2.x2 >> v2.y1 >> v2.y2 >> v2.z1 >> v2.z2;
+	stream >> v2.x >> v2.y >> v2.z;
+	
 	return stream;
 }
