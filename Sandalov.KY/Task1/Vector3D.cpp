@@ -45,13 +45,10 @@ Vector3D Vector3D::operator- (const Vector3D& v2)//peregruzka -
 	return tmp;
 }
 
-Vector3D Vector3D::operator* (const Vector3D& v2)//peregruzka *
+double Vector3D::operator* (const Vector3D& v2)//peregruzka *
 {
-	Vector3D tmp;
-	tmp.x = x * v2.x;
-	tmp.y = y * v2.y;
-	tmp.z = z * v2.z;
-	return tmp;
+	
+	return (x*v2.x + y*v2.y + z*v2.z);
 }
 
 Vector3D operator* (double d, const Vector3D& v2)// umnozhenie skalyara na vektor

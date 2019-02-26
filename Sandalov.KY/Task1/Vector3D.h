@@ -17,7 +17,7 @@ public:
 	Vector3D& operator= (const Vector3D& v2); //peregruzka operatora =
 	Vector3D operator+ (const Vector3D& v2); //peregruzka +
 	Vector3D operator- (const Vector3D& v2); //peregruzka -
-	Vector3D operator* (const Vector3D& v2); //peregruzka *
+	double operator* (const Vector3D& v2); //peregruzka *
 	friend Vector3D operator* (double d, const Vector3D& v2); // dlya umnozheniya skalyara na vector
 	bool operator== (const Vector3D& v2); // peregruzka ==
 	bool operator!= (const Vector3D& v2); // peregruzka !=

@@ -27,9 +27,9 @@ int main() {
 	cout << "Raznost' vektorov v1 v2 (=v5)" << endl;
 	cout << v5 << endl;
 	//proizvedenie
-	Vector3D v6 = v1 * v2;
-	cout << "Proizvedenie vektorov v1 v2 (=v6)" << endl;
-	cout << v6 << endl;
+	double s = v1 * v2;
+	cout << "Skalyarnoe proizvedenie vektorov v1 v2 (=v6)" << endl;
+	cout << s << endl;
 	//proizvedenie skalyara na vector
 	double a = 0.5;
 	Vector3D v7 = a * v1;
