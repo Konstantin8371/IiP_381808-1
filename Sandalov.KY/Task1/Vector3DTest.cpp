@@ -42,7 +42,7 @@ int main() {
 	if (v1 < v7)
 		cout << "v1 < v7" << endl;
 	else cout << "v1 >= v7" << endl;
-	_getch();
+	_getch(); // prosto proverka gita;
 	return 0;
 }
 
