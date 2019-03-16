@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Octal.cpp" />
+    <ClCompile Include="OctalTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Octal.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{494F14F7-44EC-43D2-99D0-A5ABD8919183}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -145,9 +152,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Source1.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
