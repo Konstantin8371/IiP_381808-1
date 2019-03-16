@@ -3,7 +3,7 @@
 #include <string>
 
 using namespace std;
-// объявление структуры, которая будет типом исключения
+// obyavlenie strukturi, kotoraya budet tipom isklucheniya
 enum ExType {strNOTOCTA};
 struct Exeption
 {
@@ -14,15 +14,15 @@ struct Exeption
 
 class Octal
 {
-	int size; // размер массива элементов типа unsigned char
-	int lng; // фактическая длина восьмеричного числа
-	unsigned char* octa; // указатель на память, где хранится массив цифр восьмеричного числа
+	int size; // razmer massiva elementov tipa unsigned char
+	int lng; // fakticheskaya dlina vos'merichnogo chisla
+	unsigned char* octa; // ukazatel na mesto v pamyati, gde hranitsa massiv chisel vosmerichnogo chisla
 public:
-	Octal(); // конструктор по умолчанию
-	Octal(int _size); // конструктор с задаваемым размером массива 
-	Octal(const string& _str); // конструктор преобразования типа из строки 
-	Octal(const Octal& _oct); // конструктор копирования
-	// перегрузка операторов
+	Octal(); // konstruktor po umolchaniyu
+	Octal(int _size); // konstruktor s zadavaemim razmerom massiva 
+	Octal(const string& _str); // konstruktor preobrazovaniya tipa 
+	Octal(const Octal& _oct); // konstruktor kopirovaniya
+	// peregruzka operatorov
 	Octal& operator= (const Octal& _oct);
 	Octal operator+ (const Octal& _oct);
 	Octal operator- (const Octal& _oct);
@@ -35,6 +35,6 @@ public:
 	bool operator<= (const Octal& _oct);
 	friend ostream& operator<< (ostream& stream, const Octal& _oct);
 	friend istream& operator>> (istream& stream, Octal& _oct);
-	// деструктор 
+	// destruktor
 	~Octal();
 };

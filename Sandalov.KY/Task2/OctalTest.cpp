@@ -8,10 +8,10 @@ int main()
 {
 	setlocale(LC_ALL, "rus");
 	Octal a, b, c;
-	cout << "Введите a и b" << endl;
+	cout << "Vvedite a , b" << endl;
 m:
 	int num = 0;
-	// обработка исключения
+	// obrabotka isklucheniya
 	try
 	{
 		int number = 0;
@@ -22,9 +22,9 @@ m:
 	catch (Exeption& ex)
 	{
 		if (num == 0)
-			cout << "Неверный символ № " << ex.pos << " числа a" << endl;
+			cout << "Neverniy simvol № " << ex.pos << " chisla a" << endl;
 		else
-			cout << "Неверный символ № " << ex.pos << " числа b" << endl;
+			cout << "Neverniy simvol № " << ex.pos << " chisla b" << endl;
 		goto m;
 
 	}
@@ -51,11 +51,11 @@ m:
 	c = a * b;
 	cout << "a * b = " << c;
 
-	ofstream out("OutFile.txt"); // запись в файл
+	ofstream out("OutFile.txt"); // zapis' v fayl
 	out << a << ' ' << b;
 	out.close();
-	ifstream in("OutFile.txt"); // чтение из файла
+	ifstream in("OutFile.txt"); // chtenie iz fayla
 	in >> a >> b;
-	cout << "a и b из файла OutFile.txt " << endl << a << b;
+	cout << "a , b iz fayla OutFile.txt " << endl << a << b;
 	return 0;
 }

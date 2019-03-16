@@ -1,12 +1,12 @@
 #include "Octal.h"
-// конструктор по умолчанию
+// konstruktor po umolchaniyu
 Octal::Octal()
 {
 	size = 0;
 	lng = 0;
 	octa = 0;
 }
-// конструктор с задаваемым размером массива
+// konstruktor s zadavaemim razmerom massiva
 Octal::Octal(int _size)
 {
 	lng = size = _size;
@@ -14,7 +14,7 @@ Octal::Octal(int _size)
 	for (int i = 0; i < lng; ++i)
 		octa[i] = 0;
 }
-// конструктор преобразования типа из строки
+// konstruktor preobrazovaniya tipa
 Octal::Octal(const string& _str)
 {
 	lng = size = _str.length();
@@ -23,9 +23,9 @@ Octal::Octal(const string& _str)
 		if (_str[lng - 1 - i] - '0' >= 0 && _str[lng - 1 - i] - '0' < 8)
 			octa[i] = _str[lng - 1 - i] - '0';
 		else
-			throw Exeption(strNOTOCTA, lng - i); // возбуждение исключения в случае, если неверно введен символ восьмеричного числа
+			throw Exeption(strNOTOCTA, lng - i); // vozbuzhdenie isklucheniya v sluchae, esli neverno vveden simvol cos'merichnogo chisla
 }
-// конструктор копирования
+// konstruktor kopirovaniya
 Octal::Octal(const Octal& _oct)
 {
 	lng = size = _oct.size;
@@ -34,7 +34,7 @@ Octal::Octal(const Octal& _oct)
 		octa[i] = _oct.octa[i];
 
 }
-// функция, которая позволяет выбрать длины наименьшего и наибольшего чисел и возвращает через параметры эти длины и указатели на большее и меньшее восьмеричные числа
+// funkciya, kotoraya pozvolyaet vibrat' dlini naimenshego i naibolshego chisel i vozvrashaet cherez parametri eti dlini i ukazateli na bolshee i menshee vos'merichnie chisla
 void find_min_max(unsigned char* octa, unsigned char* _octa, int lng, int _lng, int* mins, int* maxs, unsigned char** max_a, unsigned char** min_b)
 {
 	
@@ -54,7 +54,7 @@ void find_min_max(unsigned char* octa, unsigned char* _octa, int lng, int _lng, 
 	}
 	return;
 }
-// перегрузка оператора присваивания
+// peregruzka operatora prisvaivaniya
 Octal& Octal::operator= (const Octal& _oct)
 {
 	if (this != &_oct)
@@ -70,21 +70,21 @@ Octal& Octal::operator= (const Octal& _oct)
 	}
 	return *this;
 }
-// перегрузка арифметических оператотров
+// peregruzka arifmeticheskih operatorov
 // +
 Octal Octal::operator+ (const Octal& _oct)
 {
-	int mins, maxs; // длины большего и меньшего числа
-	unsigned char *max_a, *min_b; // указатели на большее и меншее числа
+	int mins, maxs; // dlini bolshego i menshego chisel
+	unsigned char *max_a, *min_b; // ukazateli na bolshee i menshee chisla
 	find_min_max(octa, _oct.octa, lng, _oct.lng, &mins, &maxs, &max_a, &min_b);
-	Octal tmp(maxs + 1); // создаем объект класса с длиной наибольшего числа + 1, то есть, с запасом на появление еще одного разряда восьмеричного числа при переходе
-	int pls = 0; // переход от суммы двух цифр разряда в следующий 
-	for (int i = 0; i < mins; ++i) // происходит сложение меньшего числа с большим, пока меньшее не закончится
+	Octal tmp(maxs + 1); // sozdaem ob'ekt klassa Octal s dlinoy naibolshego chisla + 1, s zapasom na poyavlenie eshe odnogo chisla
+	int pls = 0; // perehod v starshiy razrad 
+	for (int i = 0; i < mins; ++i) // slozheniye men'shego chisla s bol'shim, poka ono ne zakonchitsya
 	{
 		tmp.octa[i] = (octa[i] + _oct.octa[i] + pls) % 8;
 		pls = (octa[i] + _oct.octa[i] + pls) / 8;
 	}
-	if (_oct.lng != lng) // дальше, если длины двух чисел не равны, мы просто сносим оставшуюся часть большего числа, проверяя переход в следующий разряд
+	if (_oct.lng != lng) // yesli dlini dvuh chisel ne ravni, snosim ostavshuyusya chast' bol'shegi chisla
 	{
 		for (int i = mins; i < maxs; ++i)
 		{
@@ -92,11 +92,11 @@ Octal Octal::operator+ (const Octal& _oct)
 			pls = (max_a[i] + pls) / 8;
 			
 		}
-		if (pls == 0) // смотрим на последний переход, если он равен нулю, то фактическую длину числа делаем равной длине наибольшего из слагаемых
+		if (pls == 0) // yesli posledniy perehod = 0
 		{
 			tmp.lng = maxs;
 		}
-		else // иначе оставляем на один разряд больше, присваивая ему значение 1
+		else // ili dobavlyaem starshiy razryad
 		{
 			tmp.octa[maxs] = 1;
 			pls = 0;
@@ -117,16 +117,15 @@ Octal Octal::operator+ (const Octal& _oct)
 	}
 	return tmp;
 }
-//начало аналогично с оператором +
+
 Octal Octal::operator- (const Octal& _oct)
 {
 	int mins, maxs;
 	unsigned char *max_a, *min_b;
 	find_min_max(octa, _oct.octa, lng, _oct.lng, &mins, &maxs, &max_a, &min_b);
 	Octal tmp(maxs);
-	unsigned char pls = 0; // занимаем из старшего разряда
-	for (int i = 0; i < mins; ++i) // вычитание из большего меньшего, пока меньшее не заканчивается
-	{
+	unsigned char pls = 0; // zanimaem iz starshego razryada
+	for (int i = 0; i < mins; ++i) // vichitanie iz bol'shego men'shego, poka ono ne zokonchitsya
 		
 		if (octa[i] - pls < _oct.octa[i])
 		{
@@ -138,17 +137,17 @@ Octal Octal::operator- (const Octal& _oct)
 			tmp.octa[i] = octa[i] - pls - _oct.octa[i];
 			pls = 0;
 		}
-	}
-	if (lng != _oct.lng) // и если длины чисел не равны, то сносим оставшуюся часть большего числа
+	
+	if (lng != _oct.lng) // snosim bolshee chislo
 	{
 		for (int i = mins; i < maxs; ++i)
 		{
-			if (lng < _oct.lng) // если длина числа, из которого вычитают будет меньше длины вычитаемого (по сути, вычитаем из 0)
+			if (lng < _oct.lng) // vichitaem iz 0, esli dlina vichitaemogo >
 			{
 				tmp.octa[i] = 8 - (_oct.octa[i] + pls);
 				pls = 1;
 			}
-			else // сносим оставшиеся разряды числа из которого вычитаем, проверяя, занимаем мы из старших разрядов или нет
+			else // snosim ostavshiesya razryadi
 			{
 				if (octa[i] - pls < 0)
 				{
@@ -165,32 +164,32 @@ Octal Octal::operator- (const Octal& _oct)
 	}
 	return tmp;
 }
-// начало аналогично с оператором +
+
 Octal Octal::operator* (const Octal& _oct)
 {
 	int mins, maxs;
 	unsigned char *max_a, *min_b;
 	find_min_max(octa, _oct.octa, lng, _oct.lng, &mins, &maxs, &max_a, &min_b);
-	Octal tmp(maxs + mins); // длину числа, которое получится в результате умножения берем с запасом + 1, в случае появления нового при переходе из последнего
-	for (int i = 0; i < mins; ++i) // производим умножение большего числа на отдельные цифры меньшего, начиная с 1-ой со смещением на 1 разряд и просто складываем эти произведения
+	Octal tmp(maxs + mins); // dlina rezultata ot umnozheniya s zapasom
+	for (int i = 0; i < mins; ++i) // umnozheniye bolshego chisla na otdel'nie cifri men'shego
 	{
-		unsigned char pls = 0; //перенос в старший разряд
-		Octal trnst(maxs + i + 1); // длина результата каждого произведения с учетом смещения на 1 разряд и запасом для появления нового разряда
+		unsigned char pls = 0; // perenos v starshiy razryad
+		Octal trnst(maxs + i + 1); // rezul'tat kazhdogo proizvedeniya s zapasom
 		int j = 0;
-		while(j < i) // обнуляем младщие разряды, с которых сместились
+		while(j < i) // obnulyaem mladshie razryadi, s kotorih smestilis'
 		{
 			trnst.octa[j] = 0;
 			j++;
 		}
 		int k = 0;
-		for (j; j < maxs + i; j++) // умножение юольшего числа на отдельные цифры меньшего, начиная с 1-ой
+		for (j; j < maxs + i; j++)
 		{
-			if ((max_a[k] * min_b[i] + pls) < 8) // без переноса
+			if ((max_a[k] * min_b[i] + pls) < 8) // bez perenosa
 			{
 				trnst.octa[j] = max_a[k] * min_b[i] + pls;
 				pls = 0;
 			}
-			else // в случае переноса в старший разряд
+			else // v sluchae perenosa
 			{
 				unsigned char ff = max_a[k] * min_b[i] + pls;
 				while (ff - 8 >= 0)
@@ -200,7 +199,7 @@ Octal Octal::operator* (const Octal& _oct)
 			}
 			k++;
 		}
-		if (pls != 0) // проверяем, появился ли новый старший разряд, если да, то заполняем его, если нет, то фактическую длину произведения приравниваем к длине большего множителя
+		if (pls != 0) // proveryaem poyavlenie novogo starshego razryada
 		{
 			trnst.octa[maxs + i] = pls;
 			pls = 0;
@@ -209,13 +208,13 @@ Octal Octal::operator* (const Octal& _oct)
 		{
 			trnst.lng = trnst.size - 1;
 		}
-		tmp = tmp + trnst; // сумма произведений
+		tmp = tmp + trnst; // summa proizvedeniy
 		
 	}
 	
 	return tmp;
 }
-// перегрузка операторов сравнения
+// peregruzka operatorov sravneniya
 bool Octal::operator== (const Octal& _oct)
 {
 	if (lng != _oct.lng) return false;
@@ -278,10 +277,10 @@ bool Octal::operator>= (const Octal& _oct)
 {
 	return !(*this < _oct);
 }
-// перегрузка операторов поточного ввода-вывода
+// peregruzka operatorov potochnogo vvoda-vivoda
 ostream& operator<< (ostream& stream, const Octal& _oct)
 {
-	if (_oct.octa[_oct.lng - 1] != 0) //при выводе проверяем наличие нулей на местах старших разрядов
+	if (_oct.octa[_oct.lng - 1] != 0) //proveryaem nalichie nuley v starshih razryadah
 	{
 		for (int i = _oct.lng - 1; i >= 0; --i)
 		{
@@ -289,7 +288,7 @@ ostream& operator<< (ostream& stream, const Octal& _oct)
 		}
 		cout << endl;
 	}
-	else // и если они там стоят, то убираем лишние при выводе, то есть, просто не выводим их
+	else // ne vivodim lishniye pri vivode chisla
 	{
 		int i = _oct.lng - 1;
 		while (_oct.octa[i] == 0 && i >= 1)
@@ -312,7 +311,7 @@ istream& operator>> (istream& stream, Octal& _oct)
 	_oct = str;
 	return stream;
 }
-// деструктор
+// destruktor
 Octal::~Octal()
 {
 	lng = size = 0;
