@@ -3,7 +3,7 @@
 #include <string>
 
 using namespace std;
-// объявление структуры, которая будет типом исключения
+// объявление структуры, которая будет типом исключения.
 enum ExType {strNOTOCTA};
 struct Exeption
 {
