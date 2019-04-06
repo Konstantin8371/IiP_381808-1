@@ -1,0 +1,4 @@
+"Dictionary" ver. 1.2
+Word: Sun; Translate: Солнце, Солнышко;
+Word: Moon; Translate: Луна;
+Word: Midnight; Translate: Полночь;

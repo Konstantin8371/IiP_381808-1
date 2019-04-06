@@ -5,7 +5,7 @@ Dictionary::Dictionary() // конструктор по умолчанию
 	count = 0;
 	realCount = 0;
 	ArrDict = new Word[realCount];
-	ch = false;
+	
 	
 }
 
@@ -13,7 +13,7 @@ Dictionary::Dictionary(const Dictionary& _dict) // копирования
 {
 	count = _dict.count;
 	realCount = _dict.realCount;
-	ch = _dict.ch;
+	
 	for (int i = 0; i < count; ++i)
 	{
 		ArrDict[i] = copy(_dict.ArrDict[i]);
@@ -26,7 +26,7 @@ Dictionary::Dictionary(const string& _eng, const string& _rus) // с парам�
 	realCount = 0;
 	AddWord(_eng);
 	AddTranslate(_rus, count);
-	ch = false;
+	
 }
 
 Dictionary::~Dictionary() // деструктор
@@ -43,11 +43,6 @@ Dictionary::~Dictionary() // деструктор
 	realCount = 0;
 }
 
-void Dictionary::setCh() //смена значения ch
-{
-	ch = true;
-}
-
 Word Dictionary::copy (const Word& _wrd) // копирует все поля структуры word, то есть, копирует значения одной строки словаря
 {
 	Word word;
@@ -62,15 +57,7 @@ Word Dictionary::copy (const Word& _wrd) // копирует все поля с�
 
 void Dictionary::AddWord(const string& _eng) // добавляет новое слово в словарь 
 {
-	if (ch) //возбуждение исключения происходит только тогда, когда добавление слова осуществляется путем ввода его пользователем с клавиатуры, так как в случае ввода слов из файла это уже не является необходимостью плюс множественное возбуждение одного и того же исключения будет приводить к тому, что новые слова прото не будут добавляться
-	{
-		for (int i = 0; i < _eng.length(); ++i)
-		{
-			if (_eng[i] < 65 || (_eng[i] > 90 && _eng[i] < 97) || _eng[i] > 122)
-				throw 1; //возбуждение исключения для случая ввода англоязычных слов
-		}
-		ch = false;
-	}
+	
 	if (count > 0)
 	{ 
 		if (count == realCount) // проверяет, не закончился ли выделенный под слова в словаре запас
@@ -123,15 +110,7 @@ void Dictionary::AddWord(const string& _eng) // добавляет новое с
 
 void Dictionary::AddTranslate(const string& _str, int _count) // дейтвует аналогично функции добавления нового слова
 {
-	if (ch)
-	{
-		for (int i = 0; i < _str.length(); ++i)
-		{
-			if (_str[i] > 32)
-				throw 2; // возбуждение исключения для случая ввода русских слов
-		} 
-		ch = false;
-	}
+	
 	if (ArrDict[_count].leng == ArrDict[_count].realL)
 	{
 		ArrDict[_count].temp_rus = new string[ArrDict[_count].leng];
@@ -187,6 +166,7 @@ void Dictionary::ShowTranslate(int _count) // выводит варианты п
 	{
 		cout << endl << i + 1 << ") " << ArrDict[_count].rus[i];
 	}
+	cout << endl;
 }
 
 int Dictionary::GetCount() const // возвращает текущую длину словаря
@@ -196,6 +176,7 @@ int Dictionary::GetCount() const // возвращает текущую длин
 
 int Dictionary::FindWord(const string& _str) // функция возвращает индекс слова в словаре, если оно там содержится и -1 в противном случае 
 {
+	
 	for (int i = 0; i < count; ++i)
 	{
 		if (_str == ArrDict[i].eng)
@@ -251,6 +232,7 @@ istream& operator>> (istream& stream, Dictionary& _dict) // перегрузка
 
 	char str[256];
 	char ch = 0;
+	stream.getline(str, 256);
 	if(stream.getline(str, 256, ':'))
 		do
 		{
@@ -272,7 +254,7 @@ istream& operator>> (istream& stream, Dictionary& _dict) // перегрузка
 
 ostream& operator<< (ostream& stream, const Dictionary& _dict) // вывода в поток
 {
-	stream << "\"Dictionary\" ver. 0.1";
+	stream << "\"Dictionary\" ver. 1.2";
 	for (int j = 0; j < _dict.count; ++j)
 	{
 		stream << endl << "Word: " << _dict.ArrDict[j].eng << "; Translate: ";
@@ -285,4 +267,23 @@ ostream& operator<< (ostream& stream, const Dictionary& _dict) // вывода �
 		}
 	}
 	return stream;
+}
+
+void Dictionary::ProverkaVvodaRus(const string& _str)
+{
+	for (int i = 0; i < _str.length(); ++i)
+	{
+		if (_str[i] > 32)
+			throw 2; // возбуждение исключения для случая ввода русских слов
+	}
+	
+}
+
+void Dictionary::ProverkaVvodaEng(const string& _str)
+{
+	for (int i = 0; i < _str.length(); ++i)
+	{
+		if (_str[i] < 65 || (_str[i] > 90 && _str[i] < 97) || _str[i] > 122)
+			throw 1; // возбуждение исключения для случая ввода английских слов
+	}
 }
