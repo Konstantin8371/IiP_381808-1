@@ -208,14 +208,17 @@ int Dictionary::FindWord(const string& _str) // функция возвраща�
 
 Dictionary& Dictionary::operator= (const Dictionary& dict) // перегрузка операции присваивания
 {
-	if (count < dict.count)
+	if (this != &dict)
 	{
-		ArrDict = new Word[dict.count];
-	}
-	count = dict.count;
-	for (int i = 0; i < count; ++i)
-	{
-		ArrDict[i] = copy(dict.ArrDict[i]);
+		if (count < dict.count)
+		{
+			ArrDict = new Word[dict.count];
+		}
+		count = dict.count;
+		for (int i = 0; i < count; ++i)
+		{
+			ArrDict[i] = copy(dict.ArrDict[i]);
+		}
 	}
 	return *this;
 }
@@ -247,23 +250,23 @@ istream& operator>> (istream& stream, Dictionary& _dict) // перегрузка
 	string rus;
 
 	char str[256];
-	char ch;
+	char ch = 0;
 	if(stream.getline(str, 256, ':'))
-	do
-	{
-		stream.get(ch);
-		eng = str;
-		_dict.AddWord(eng);
-
-		while (stream.getline(str, 256, ';'))
+		do
 		{
-			rus = str;
-			_dict.AddTranslate(rus, _dict.count - 1);
 			stream.get(ch);
-			if (ch == '\n')
-				break;
-		}
-	} while (stream.getline(str, 256, ':'));
+			eng = str;
+			_dict.AddWord(eng);
+
+			while (stream.getline(str, 256, ';'))
+			{
+				rus = str;
+				_dict.AddTranslate(rus, _dict.count - 1);
+				stream.get(ch);
+				if (ch == '\n')
+					break;
+			}
+		} while (stream.getline(str, 256, ':'));
 	return stream;
 }
 
