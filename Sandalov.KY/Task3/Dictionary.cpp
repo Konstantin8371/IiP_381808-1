@@ -16,43 +16,15 @@ Dictionary::Dictionary(const Dictionary& _dict) // копирования
 	
 	for (int i = 0; i < count; ++i)
 	{
-		ArrDict[i] = copy(_dict.ArrDict[i]);
+		ArrDict[i] = _dict.ArrDict[i];
 	}
-}
-
-Dictionary::Dictionary(const string& _eng, const string& _rus) // с параметрами
-{
-	count = 0;
-	realCount = 0;
-	AddWord(_eng);
-	AddTranslate(_rus, count);
-	
 }
 
 Dictionary::~Dictionary() // деструктор
 {
-	if (count > 0)
-	{
-		for (int i = 0; i < count; ++i)
-		{
-			delete[] ArrDict[i].rus;
-		}
-	}
 	delete[] ArrDict;
 	count = 0;
 	realCount = 0;
-}
-
-Word Dictionary::copy (const Word& _wrd) // копирует все поля структуры word, то есть, копирует значения одной строки словаря
-{
-	Word word;
-	word.eng = _wrd.eng;
-	word.leng = _wrd.leng;
-	word.realL = _wrd.realL;
-	word.rus = new string[word.realL];
-	for (int i = 0; i < word.leng; ++i)
-		word.rus[i] = _wrd.rus[i];
-	return word;
 }
 
 void Dictionary::AddWord(const string& _eng) // добавляет новое слово в словарь 
@@ -65,7 +37,7 @@ void Dictionary::AddWord(const string& _eng) // добавляет новое с
 			temp_ArrDict = new Word[count];
 			for (int i = 0; i < count; ++i)
 			{
-				temp_ArrDict[i] = copy(ArrDict[i]);
+				temp_ArrDict[i] = ArrDict[i];
 			}
 			count++;
 			realCount += 50;
@@ -73,18 +45,13 @@ void Dictionary::AddWord(const string& _eng) // добавляет новое с
 			ArrDict = new Word[realCount];
 			for (int i = 0; i < count - 1; ++i)
 			{
-				ArrDict[i] = copy(temp_ArrDict[i]);
+				ArrDict[i] = temp_ArrDict[i];
 			}
 			ArrDict[count - 1].eng = _eng;
 			ArrDict[count - 1].leng = 0;
 			ArrDict[count - 1].realL = 0;
 			ArrDict[count - 1].rus = new string[ArrDict[count - 1].realL];
 
-
-			for (int i = 0; i < count - 1; ++i)
-			{
-				delete[] temp_ArrDict[i].rus;
-			}
 			delete[] temp_ArrDict;
 		}
 		else // если же запас еще есть, то просто добавляет новое слово
@@ -147,11 +114,6 @@ void Dictionary::AddTranslate(const string& _str, int _count) // дейтвуе�
 
 void Dictionary::ChangeTranslate(int _count, const string& _str, int cnt) //функция меняет заданный перевод заданного слова словаря
 {
-	for (int i = 0; i < _str.length(); ++i) // возбуждение исключения для случая ввода русских слов
-	{
-		if (_str[i] > 32)
-			throw 2;
-	}
 	for (int i = 0; i < ArrDict[_count].leng; ++i) //выбирает перевод заданного слова с нужным индексом и затем заменяет его 
 	{
 		cout << i + 1 << ") " << ArrDict[_count].rus[i] << endl;
@@ -198,7 +160,7 @@ Dictionary& Dictionary::operator= (const Dictionary& dict) // перегрузк
 		count = dict.count;
 		for (int i = 0; i < count; ++i)
 		{
-			ArrDict[i] = copy(dict.ArrDict[i]);
+			ArrDict[i] = dict.ArrDict[i];
 		}
 	}
 	return *this;
@@ -209,17 +171,17 @@ Dictionary& Dictionary::operator+= (const Dictionary& _dict) // перегруз
 	temp_ArrDict = new Word[count];
 	for (int i = 0; i < count; ++i)
 	{
-		temp_ArrDict[i] = copy(ArrDict[i]);
+		temp_ArrDict[i] = ArrDict[i];
 	}
 	int cnt = count + _dict.count;
 	ArrDict = new Word[cnt];
 	for (int i = 0; i < count; ++i)
 	{
-		ArrDict[i] = copy(temp_ArrDict[i]);
+		ArrDict[i] = temp_ArrDict[i];
 	}
 	for (int i = count; i < cnt; ++i)
 	{
-		ArrDict[i] = copy(_dict.ArrDict[i - count]);
+		ArrDict[i] = _dict.ArrDict[i - count];
 	}
 	count = cnt;
 	return *this;

@@ -25,14 +25,12 @@ public:
 	void ProverkaVvodaRus(const string& _str); // методы, необходимые
 	void ProverkaVvodaEng(const string& _str); // для проверки ввода пользователем слов аглийского и русского алфавитов, в них приисходит возбуждение исключений
 	void AddWord(const string& _eng); // добывление строки в словарь
-	Word copy(const Word& _wrd); // копирование строки словаря
 	void ChangeTranslate(int _count, const string& _str, int cnt); // замена одного из переводов слова в словаре
 	void AddTranslate(const string& _str, int _count); //добавление перевода слова
 	void ShowTranslate(int _count); // показывает варианты перевода слова
 	int GetCount() const; // возвращает текущую длину словаря
 	int FindWord(const string& _str); // функция поиска слова в словаре
 	Dictionary(); // конструктор по умолчанию
-	Dictionary(const string& _eng, const string& _rus); // с параметрами
 	Dictionary(const Dictionary& _dict); // копирования
 	~Dictionary(); // деструктор
 	Dictionary& operator= (const Dictionary& dict); // перегрузка операции присваивания
