@@ -1,13 +1,13 @@
 #include "FilmLibrary.h"
 
-FilmLib::FilmLib() // конструктор по умолчанию
+FilmLib::FilmLib() // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 {
 	count = 0;
 	buffSize = 0;
 	FilmArray = new Film [buffSize];
 }
 
-FilmLib::FilmLib(const FilmLib& _flmlb) // конструктор копирования
+FilmLib::FilmLib(const FilmLib& _flmlb) // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 {
 	count = _flmlb.count;
 	buffSize = _flmlb.buffSize;
@@ -18,12 +18,12 @@ FilmLib::FilmLib(const FilmLib& _flmlb) // конструктор копирования
 	}
 }
 
-FilmLib::~FilmLib() // деструктор
+FilmLib::~FilmLib() // РґРµСЃС‚СЂСѓРєС‚РѕСЂ
 {
 	delete[] FilmArray;
 }
 
-FilmLib& FilmLib::operator= (const FilmLib& _flmlb)  // перегрузка операции присваивания
+FilmLib& FilmLib::operator= (const FilmLib& _flmlb)  // РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
 {
 	if (&_flmlb != this)
 	{
@@ -41,9 +41,9 @@ FilmLib& FilmLib::operator= (const FilmLib& _flmlb)  // перегрузка операции прис
 	return *this;
 }
 
-void FilmLib::AddFilm(const Film& _flm) // добавление фильма в фильмотеку
+void FilmLib::AddFilm(const Film& _flm) // РґРѕР±Р°РІР»РµРЅРёРµ С„РёР»СЊРјР° РІ С„РёР»СЊРјРѕС‚РµРєСѓ
 {
-	// определение позиции, на которую необходиом поставить слово в словаре
+	// РѕРїСЂРµРґРµР»РµРЅРёРµ РїРѕР·РёС†РёРё, РЅР° РєРѕС‚РѕСЂСѓСЋ РЅРµРѕР±С…РѕРґРёРѕРј РїРѕСЃС‚Р°РІРёС‚СЊ СЃР»РѕРІРѕ РІ СЃР»РѕРІР°СЂРµ
 	int i = 0; 
 	while (FilmArray[i].name <_flm.name && i < count)
 	{
@@ -73,7 +73,7 @@ void FilmLib::AddFilm(const Film& _flm) // добавление фильма в фильмотеку
 	}
 	else
 	{
-		for (int j = count - 2; j >= i; --j) // осуществляет сдвиг всех элементов с места, на которое необходимо поставит новый элемент 
+		for (int j = count - 2; j >= i; --j) // РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚ СЃРґРІРёРі РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ СЃ РјРµСЃС‚Р°, РЅР° РєРѕС‚РѕСЂРѕРµ РЅРµРѕР±С…РѕРґРёРјРѕ РїРѕСЃС‚Р°РІРёС‚ РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ 
 		{
 			FilmArray[j + 1] = FilmArray[j];
 		}
@@ -83,7 +83,7 @@ void FilmLib::AddFilm(const Film& _flm) // добавление фильма в фильмотеку
 
 }
 
-ostream& operator<< (ostream& _out, const FilmLib& _flmlb) // перегрузка операции вывода в поток
+ostream& operator<< (ostream& _out, const FilmLib& _flmlb) // РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РІС‹РІРѕРґР° РІ РїРѕС‚РѕРє
 {
 
 	for (int i = 0; i < _flmlb.count - 1; ++i)
@@ -95,7 +95,7 @@ ostream& operator<< (ostream& _out, const FilmLib& _flmlb) // перегрузка операци
 	return _out;
 }
 
-istream& operator>> (istream& _inStream, FilmLib& _flmlb) // вывода из потока
+istream& operator>> (istream& _inStream, FilmLib& _flmlb) // РІС‹РІРѕРґР° РёР· РїРѕС‚РѕРєР°
 {
 	Film flm;
 	while (_inStream >> flm)
@@ -108,7 +108,7 @@ istream& operator>> (istream& _inStream, FilmLib& _flmlb) // вывода из потока
 	return _inStream;
 }
 
-int FilmLib::NameSearch(const string& _name) // поиск фильма по его названию (бинарный поиск)
+int FilmLib::NameSearch(const string& _name) // РїРѕРёСЃРє С„РёР»СЊРјР° РїРѕ РµРіРѕ РЅР°Р·РІР°РЅРёСЋ (Р±РёРЅР°СЂРЅС‹Р№ РїРѕРёСЃРє)
 {
 	int left = 0, right = count - 1;
 
@@ -134,19 +134,19 @@ int FilmLib::NameSearch(const string& _name) // поиск фильма по его названию (би
 	return -1;
 }
 
-Film* FilmLib::ProducerSearch(const string& _name, int* _num , Film* _flm) // поиск всех фильмов одного режиссера
+Film* FilmLib::ProducerSearch(const string& _name, int* _num , Film* _flm) // РїРѕРёСЃРє РІСЃРµС… С„РёР»СЊРјРѕРІ РѕРґРЅРѕРіРѕ СЂРµР¶РёСЃСЃРµСЂР°
 {
-	// сначала считаем число всех фильмов этого режиссера
+	// СЃРЅР°С‡Р°Р»Р° СЃС‡РёС‚Р°РµРј С‡РёСЃР»Рѕ РІСЃРµС… С„РёР»СЊРјРѕРІ СЌС‚РѕРіРѕ СЂРµР¶РёСЃСЃРµСЂР°
 	int num = 0;
 	for (int i = 0; i < count; ++i)
 	{
 		if (_name == FilmArray[i].producer)
 			num++;
 	}
-	_flm = new Film[num]; // выделяем под эти фильмы необходимое кол-во памяти
+	_flm = new Film[num]; // РІС‹РґРµР»СЏРµРј РїРѕРґ СЌС‚Рё С„РёР»СЊРјС‹ РЅРµРѕР±С…РѕРґРёРјРѕРµ РєРѕР»-РІРѕ РїР°РјСЏС‚Рё
 	*_num = num;
 	num = 0;
-	for (int i = 0; i < count; ++i) // переносим все фильмы в этот новый массив
+	for (int i = 0; i < count; ++i) // РїРµСЂРµРЅРѕСЃРёРј РІСЃРµ С„РёР»СЊРјС‹ РІ СЌС‚РѕС‚ РЅРѕРІС‹Р№ РјР°СЃСЃРёРІ
 	{
 		if (_name == FilmArray[i].producer)
 		{
@@ -157,7 +157,7 @@ Film* FilmLib::ProducerSearch(const string& _name, int* _num , Film* _flm) // по
 	return _flm;
 }
 
-Film* FilmLib::TimeSearch(int _year, int* _num, Film *_flm) // аналогично
+Film* FilmLib::TimeSearch(int _year, int* _num, Film *_flm) // Р°РЅР°Р»РѕРіРёС‡РЅРѕ
 {
 	int cnt = 0;
 	for (int i = 0; i < count; ++i)
@@ -179,17 +179,17 @@ Film* FilmLib::TimeSearch(int _year, int* _num, Film *_flm) // аналогично
 	return _flm;
 }
 
-void FilmLib::ChangeSelectedFilm(const Film& _flm, int _cnt) // меняет информацию о выбраном фильме
+void FilmLib::ChangeSelectedFilm(const Film& _flm, int _cnt) // РјРµРЅСЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РІС‹Р±СЂР°РЅРѕРј С„РёР»СЊРјРµ
 {
 	FilmArray[_cnt] = _flm;
 }
 
-int FilmLib::GetCount() // возвращает количество фильмов в фильмотеке
+int FilmLib::GetCount() // РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ С„РёР»СЊРјРѕРІ РІ С„РёР»СЊРјРѕС‚РµРєРµ
 {
 	return count;
 }
 
-void FilmLib::DeleteSelectedFilm(int _cnt) // удалене выбранного фильма
+void FilmLib::DeleteSelectedFilm(int _cnt) // СѓРґР°Р»РµРЅРµ РІС‹Р±СЂР°РЅРЅРѕРіРѕ С„РёР»СЊРјР°
 {
 
 	for (int i = _cnt; i < count - 1; ++i)
@@ -198,15 +198,15 @@ void FilmLib::DeleteSelectedFilm(int _cnt) // удалене выбранного фильма
 
 }
 
-void FilmLib::MaxBoxOffice(int *_num, Film *flm) // поиск определенного числа фильмов с максимально большими сборами
+void FilmLib::MaxBoxOffice(int *_num, Film *flm) // РїРѕРёСЃРє РѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ С‡РёСЃР»Р° С„РёР»СЊРјРѕРІ СЃ РјР°РєСЃРёРјР°Р»СЊРЅРѕ Р±РѕР»СЊС€РёРјРё СЃР±РѕСЂР°РјРё
 {
 	int cnt = 0;
 	int maxBoxOffice = LONG_MAX;
 	int _cnt = 0;
-	while (cnt < *_num) // пока число выбранных фильмов меньше заданного выполняем поиск
+	while (cnt < *_num) // РїРѕРєР° С‡РёСЃР»Рѕ РІС‹Р±СЂР°РЅРЅС‹С… С„РёР»СЊРјРѕРІ РјРµРЅСЊС€Рµ Р·Р°РґР°РЅРЅРѕРіРѕ РІС‹РїРѕР»РЅСЏРµРј РїРѕРёСЃРє
 	{
-		for (int i = 0; i < count; ++i) //перебор всех чисел(кассовых сборов) и проверка того условия, что они больше всех остальных чисел
-		{                               // если число больше всех остальных, не считая уже выбранного максимума(maxBoxOffice), то добавляем его в наш список и меняем максимум
+		for (int i = 0; i < count; ++i) //РїРµСЂРµР±РѕСЂ РІСЃРµС… С‡РёСЃРµР»(РєР°СЃСЃРѕРІС‹С… СЃР±РѕСЂРѕРІ) Рё РїСЂРѕРІРµСЂРєР° С‚РѕРіРѕ СѓСЃР»РѕРІРёСЏ, С‡С‚Рѕ РѕРЅРё Р±РѕР»СЊС€Рµ РІСЃРµС… РѕСЃС‚Р°Р»СЊРЅС‹С… С‡РёСЃРµР»
+		{                               // РµСЃР»Рё С‡РёСЃР»Рѕ Р±РѕР»СЊС€Рµ РІСЃРµС… РѕСЃС‚Р°Р»СЊРЅС‹С…, РЅРµ СЃС‡РёС‚Р°СЏ СѓР¶Рµ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РјР°РєСЃРёРјСѓРјР°(maxBoxOffice), С‚Рѕ РґРѕР±Р°РІР»СЏРµРј РµРіРѕ РІ РЅР°С€ СЃРїРёСЃРѕРє Рё РјРµРЅСЏРµРј РјР°РєСЃРёРјСѓРј
 			if (FilmArray[i].box_office < maxBoxOffice)
 			{
 				bool ch = true;
@@ -226,18 +226,18 @@ void FilmLib::MaxBoxOffice(int *_num, Film *flm) // поиск определенного числа фи
 			
 		}
 		_cnt++; 
-		if (_cnt > count) // как только перебрали все доступные фильмы, а число отобранных меньше заданного числа, прекращаем поик и выводим все, что есть
+		if (_cnt > count) // РєР°Рє С‚РѕР»СЊРєРѕ РїРµСЂРµР±СЂР°Р»Рё РІСЃРµ РґРѕСЃС‚СѓРїРЅС‹Рµ С„РёР»СЊРјС‹, Р° С‡РёСЃР»Рѕ РѕС‚РѕР±СЂР°РЅРЅС‹С… РјРµРЅСЊС€Рµ Р·Р°РґР°РЅРЅРѕРіРѕ С‡РёСЃР»Р°, РїСЂРµРєСЂР°С‰Р°РµРј РїРѕРёРє Рё РІС‹РІРѕРґРёРј РІСЃРµ, С‡С‚Рѕ РµСЃС‚СЊ
 		{
 			*_num = cnt;
-			cout << "В фильмотеке нет необходимого числа фильмов" << '\n';
-			cout << "Вот все, что есть: " << '\n';
+			cout << "Р’ С„РёР»СЊРјРѕС‚РµРєРµ РЅРµС‚ РЅРµРѕР±С…РѕРґРёРјРѕРіРѕ С‡РёСЃР»Р° С„РёР»СЊРјРѕРІ" << '\n';
+			cout << "Р’РѕС‚ РІСЃРµ, С‡С‚Рѕ РµСЃС‚СЊ: " << '\n';
 			return;
 		}
 	}
 
 }
 
-void FilmLib::MaxBoxOffice(int *_num, Film *flm, const int& _year) // аналогично предыдущему методу
+void FilmLib::MaxBoxOffice(int *_num, Film *flm, const int& _year) // Р°РЅР°Р»РѕРіРёС‡РЅРѕ РїСЂРµРґС‹РґСѓС‰РµРјСѓ РјРµС‚РѕРґСѓ
 {
 	int cnt = 0;
 	int _cnt = 0;
@@ -268,8 +268,8 @@ void FilmLib::MaxBoxOffice(int *_num, Film *flm, const int& _year) // аналогично
 		if (_cnt > count)
 		{
 			*_num = cnt;
-			cout << "В фильмотеке нет необходимого числа фильмов"<<'\n';
-			cout << "Вот все, что есть: " << '\n';
+			cout << "Р’ С„РёР»СЊРјРѕС‚РµРєРµ РЅРµС‚ РЅРµРѕР±С…РѕРґРёРјРѕРіРѕ С‡РёСЃР»Р° С„РёР»СЊРјРѕРІ"<<'\n';
+			cout << "Р’РѕС‚ РІСЃРµ, С‡С‚Рѕ РµСЃС‚СЊ: " << '\n';
 			return;
 		}
 	}
@@ -277,7 +277,7 @@ void FilmLib::MaxBoxOffice(int *_num, Film *flm, const int& _year) // аналогично
 	
 }
 
-int StrToInt(const string& _str) // фукция перевода значения строоковой переменной, содержащей информацию о числе в переменную типа int
+int StrToInt(const string& _str) // С„СѓРєС†РёСЏ РїРµСЂРµРІРѕРґР° Р·РЅР°С‡РµРЅРёСЏ СЃС‚СЂРѕРѕРєРѕРІРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№, СЃРѕРґРµСЂР¶Р°С‰РµР№ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С‡РёСЃР»Рµ РІ РїРµСЂРµРјРµРЅРЅСѓСЋ С‚РёРїР° int
 {
 	int sum = 0;
 	for (int i = 0; i < _str.length(); ++i)
@@ -287,12 +287,12 @@ int StrToInt(const string& _str) // фукция перевода значения строоковой переменн
 	return sum;
 }
 
-Film FilmLib::GetFilm(const int _count) // метод возвращает информацию об одном фильме из фильмотеки
+Film FilmLib::GetFilm(const int _count) // РјРµС‚РѕРґ РІРѕР·РІСЂР°С‰Р°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕРґРЅРѕРј С„РёР»СЊРјРµ РёР· С„РёР»СЊРјРѕС‚РµРєРё
 {
 	return FilmArray[_count];
 }
 
-ostream& operator<< (ostream& _out, const Film& _flm) // перегрузка операции вывода в поток и вывода из него для структур
+ostream& operator<< (ostream& _out, const Film& _flm) // РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РІС‹РІРѕРґР° РІ РїРѕС‚РѕРє Рё РІС‹РІРѕРґР° РёР· РЅРµРіРѕ РґР»СЏ СЃС‚СЂСѓРєС‚СѓСЂ
 {
 	_out << _flm.name << ';' << _flm.producer << ';' << _flm.swriter << ';' << _flm.composer << ';' << _flm.day << ';' << _flm.month << ';' << _flm.year << ';' << _flm.box_office ;
 	return _out;
@@ -323,12 +323,12 @@ istream& operator>> (istream& _in, Film& _flm)
 	return _in;
 }
 
-void FilmLib::ProverkaVvodaRus(const string& _str) // для проверки ввода пользователем слов русского алфавита или цифр, приисходит возбуждение исключений
+void FilmLib::ProverkaVvodaRus(const string& _str) // РґР»СЏ РїСЂРѕРІРµСЂРєРё РІРІРѕРґР° РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј СЃР»РѕРІ СЂСѓСЃСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р° РёР»Рё С†РёС„СЂ, РїСЂРёРёСЃС…РѕРґРёС‚ РІРѕР·Р±СѓР¶РґРµРЅРёРµ РёСЃРєР»СЋС‡РµРЅРёР№
 {
 	for (int i = 0; i < _str.length(); ++i)
 	{
 		if ((_str[i] > 32 && _str[i] < 48) || _str[i] > 57)
-			throw 1; // возбуждение исключения для случая ввода русских слов
+			throw 1; // РІРѕР·Р±СѓР¶РґРµРЅРёРµ РёСЃРєР»СЋС‡РµРЅРёСЏ РґР»СЏ СЃР»СѓС‡Р°СЏ РІРІРѕРґР° СЂСѓСЃСЃРєРёС… СЃР»РѕРІ
 	}
 
 }

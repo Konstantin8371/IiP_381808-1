@@ -5,49 +5,49 @@
 
 using namespace std;
 
-struct Film // структура, содержащая информацию об одном фильме из фильмотеки
+struct Film // СЃС‚СЂСѓРєС‚СѓСЂР°, СЃРѕРґРµСЂР¶Р°С‰Р°СЏ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕРґРЅРѕРј С„РёР»СЊРјРµ РёР· С„РёР»СЊРјРѕС‚РµРєРё
 {
-	string name; // название фильма
-	string producer; // режиссер
-	string swriter; // сценарст
-	string composer; // композитор
-	// дата выхода в прокат
+	string name; // РЅР°Р·РІР°РЅРёРµ С„РёР»СЊРјР°
+	string producer; // СЂРµР¶РёСЃСЃРµСЂ
+	string swriter; // СЃС†РµРЅР°СЂСЃС‚
+	string composer; // РєРѕРјРїРѕР·РёС‚РѕСЂ
+	// РґР°С‚Р° РІС‹С…РѕРґР° РІ РїСЂРѕРєР°С‚
 		int day; 
 		int month;
 		int year;
-	// сборы
+	// СЃР±РѕСЂС‹
 	int box_office;
 };
 
 class FilmLib
 {
 	Film *FilmArray;
-	int count; // число фиьмов в фильмотеке
-	int buffSize; // запас места в словаре 
+	int count; // С‡РёСЃР»Рѕ С„РёСЊРјРѕРІ РІ С„РёР»СЊРјРѕС‚РµРєРµ
+	int buffSize; // Р·Р°РїР°СЃ РјРµСЃС‚Р° РІ СЃР»РѕРІР°СЂРµ 
 
 public:
 
-	void ProverkaVvodaRus(const string& _str); // для проверки ввода пользователем слов русского алфавита или цифр, приисходит возбуждение исключений
-	void AddFilm(const Film& _flm); // добавление фильма в фильмотеку
-	int NameSearch(const string& _name); // поиск фильма по его названию
-	Film* ProducerSearch(const string& _name, int *_num, Film* _flm); // поиск всех фильмов одного режиссера
-	Film* TimeSearch(int _year, int *_num, Film *flm); // поиск всех фильмов, вышедших в определенном году
-	Film GetFilm(const int _count); // метод возвращает информацию об одном фильме из фильмотеки
-	void ChangeSelectedFilm(const Film& _flm, int _cnt); // меняет информацию о выбраном фильме
-	int GetCount(); // возвращает количество фильмов в фильмотеке
-	void DeleteSelectedFilm(int _cnt); // удалене выбранного фильма 
-	void MaxBoxOffice(int *_num, Film *flm); // поиск определенного числа фильмов с максимально большими сборами
-	void MaxBoxOffice(int *_num, Film *flm, const int& year); // поиск определенного числа фильмов, вышедших в конкретном году, с максимально большими сборами
+	void ProverkaVvodaRus(const string& _str); // РґР»СЏ РїСЂРѕРІРµСЂРєРё РІРІРѕРґР° РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј СЃР»РѕРІ СЂСѓСЃСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р° РёР»Рё С†РёС„СЂ, РїСЂРёРёСЃС…РѕРґРёС‚ РІРѕР·Р±СѓР¶РґРµРЅРёРµ РёСЃРєР»СЋС‡РµРЅРёР№
+	void AddFilm(const Film& _flm); // РґРѕР±Р°РІР»РµРЅРёРµ С„РёР»СЊРјР° РІ С„РёР»СЊРјРѕС‚РµРєСѓ
+	int NameSearch(const string& _name); // РїРѕРёСЃРє С„РёР»СЊРјР° РїРѕ РµРіРѕ РЅР°Р·РІР°РЅРёСЋ
+	Film* ProducerSearch(const string& _name, int *_num, Film* _flm); // РїРѕРёСЃРє РІСЃРµС… С„РёР»СЊРјРѕРІ РѕРґРЅРѕРіРѕ СЂРµР¶РёСЃСЃРµСЂР°
+	Film* TimeSearch(int _year, int *_num, Film *flm); // РїРѕРёСЃРє РІСЃРµС… С„РёР»СЊРјРѕРІ, РІС‹С€РµРґС€РёС… РІ РѕРїСЂРµРґРµР»РµРЅРЅРѕРј РіРѕРґСѓ
+	Film GetFilm(const int _count); // РјРµС‚РѕРґ РІРѕР·РІСЂР°С‰Р°РµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕРґРЅРѕРј С„РёР»СЊРјРµ РёР· С„РёР»СЊРјРѕС‚РµРєРё
+	void ChangeSelectedFilm(const Film& _flm, int _cnt); // РјРµРЅСЏРµС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РІС‹Р±СЂР°РЅРѕРј С„РёР»СЊРјРµ
+	int GetCount(); // РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ С„РёР»СЊРјРѕРІ РІ С„РёР»СЊРјРѕС‚РµРєРµ
+	void DeleteSelectedFilm(int _cnt); // СѓРґР°Р»РµРЅРµ РІС‹Р±СЂР°РЅРЅРѕРіРѕ С„РёР»СЊРјР° 
+	void MaxBoxOffice(int *_num, Film *flm); // РїРѕРёСЃРє РѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ С‡РёСЃР»Р° С„РёР»СЊРјРѕРІ СЃ РјР°РєСЃРёРјР°Р»СЊРЅРѕ Р±РѕР»СЊС€РёРјРё СЃР±РѕСЂР°РјРё
+	void MaxBoxOffice(int *_num, Film *flm, const int& year); // РїРѕРёСЃРє РѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ С‡РёСЃР»Р° С„РёР»СЊРјРѕРІ, РІС‹С€РµРґС€РёС… РІ РєРѕРЅРєСЂРµС‚РЅРѕРј РіРѕРґСѓ, СЃ РјР°РєСЃРёРјР°Р»СЊРЅРѕ Р±РѕР»СЊС€РёРјРё СЃР±РѕСЂР°РјРё
 
-	FilmLib(); // конструктор по умолчанию
-	FilmLib(const FilmLib& _flmlb); // конструктор копирования
-	~FilmLib(); // деструктор 
+	FilmLib(); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+	FilmLib(const FilmLib& _flmlb); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
+	~FilmLib(); // РґРµСЃС‚СЂСѓРєС‚РѕСЂ 
 
-	FilmLib& operator= (const FilmLib& _flmlb); // перегрузка операции присваивания
-	friend ostream& operator<< (ostream& _out, const FilmLib& _flmlb); // перегрузка операции вывода в поток
-	friend istream& operator>> (istream& _in, FilmLib& _flmlb);        // ввода из потока 
+	FilmLib& operator= (const FilmLib& _flmlb); // РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
+	friend ostream& operator<< (ostream& _out, const FilmLib& _flmlb); // РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РІС‹РІРѕРґР° РІ РїРѕС‚РѕРє
+	friend istream& operator>> (istream& _in, FilmLib& _flmlb);        // РІРІРѕРґР° РёР· РїРѕС‚РѕРєР° 
 };
 
-ostream& operator<< (ostream& _out, const Film& _flm); // так же для структуры Film
+ostream& operator<< (ostream& _out, const Film& _flm); // С‚Р°Рє Р¶Рµ РґР»СЏ СЃС‚СЂСѓРєС‚СѓСЂС‹ Film
 istream& operator>> (istream& _in, Film& _flm);        //
-int StrToInt(const string& _str); // фукция перевода значения строоковой переменной, содержащей информацию о числе в переменную типа int
+int StrToInt(const string& _str); // С„СѓРєС†РёСЏ РїРµСЂРµРІРѕРґР° Р·РЅР°С‡РµРЅРёСЏ СЃС‚СЂРѕРѕРєРѕРІРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№, СЃРѕРґРµСЂР¶Р°С‰РµР№ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С‡РёСЃР»Рµ РІ РїРµСЂРµРјРµРЅРЅСѓСЋ С‚РёРїР° int
