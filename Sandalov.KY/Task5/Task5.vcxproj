@@ -18,6 +18,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CashBox.cpp" />
+    <ClCompile Include="Storage.cpp" />
+    <ClCompile Include="TestCash.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CashBox.h" />
+    <ClInclude Include="Storage.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="check.txt" />
+    <Text Include="input.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9915F973-3A10-42AD-A0FA-5D8125162BE4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -145,8 +158,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
